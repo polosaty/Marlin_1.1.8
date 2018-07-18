@@ -725,7 +725,7 @@
  */
 #define X_PROBE_OFFSET_FROM_EXTRUDER 51  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER -12  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER 1   // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 4000
@@ -829,8 +829,8 @@
 // #define Y_BED_SIZE 220
 // Tevo Tarantula
 // Linear Guide Rails
-#define X_BED_SIZE 180
-#define Y_BED_SIZE 190
+#define X_BED_SIZE 220
+#define Y_BED_SIZE 220
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -839,7 +839,7 @@
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 // #define Z_MAX_POS 200
-#define Z_MAX_POS 180  // reduced because of linear guide rail and glass and PEI sheet
+#define Z_MAX_POS 220  // reduced because of linear guide rail and glass and PEI sheet
 
 
 /**
@@ -974,10 +974,14 @@
   // #define BACK_PROBE_BED_POSITION 170
 
 // Tevo Tarantula SN04-N inductive sensor fitted on stock Tevo hot-end
-#define LEFT_PROBE_BED_POSITION 30
-#define RIGHT_PROBE_BED_POSITION 160
-#define FRONT_PROBE_BED_POSITION 30
-#define BACK_PROBE_BED_POSITION 160
+// #define LEFT_PROBE_BED_POSITION 51
+// #define RIGHT_PROBE_BED_POSITION 180
+// #define FRONT_PROBE_BED_POSITION 10
+// #define BACK_PROBE_BED_POSITION 200
+  #define LEFT_PROBE_BED_POSITION  X_MIN_POS + (X_PROBE_OFFSET_FROM_EXTRUDER)
+  #define RIGHT_PROBE_BED_POSITION X_MAX_POS // - (X_PROBE_OFFSET_FROM_EXTRUDER)
+  #define FRONT_PROBE_BED_POSITION Y_MIN_POS //+ (Y_PROBE_OFFSET_FROM_EXTRUDER)
+  #define BACK_PROBE_BED_POSITION  Y_MAX_POS + (Y_PROBE_OFFSET_FROM_EXTRUDER)
 
   // The Z probe minimum outer margin (to validate G29 parameters).
   #define MIN_PROBE_EDGE 10
@@ -1866,3 +1870,5 @@
 //#define DEACTIVATE_SERVOS_AFTER_MOVE
 
 #endif // CONFIGURATION_H
+
+
